@@ -56,7 +56,7 @@ export default defineNuxtConfig({
   },
   compatibilityDate: 'latest',
   nitro: {
-    preset: import.meta.env.DEV ? 'cloudflare-module' : undefined,
+    preset: provider === 'cloudflare_pages' ? 'cloudflare-pages' : 'cloudflare-module',
     experimental: {
       openAPI: true,
     },
