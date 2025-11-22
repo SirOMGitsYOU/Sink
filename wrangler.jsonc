@@ -1,9 +1,30 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "sink",
+  "main": "dist/server/index.mjs",
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "dist/public"
+  },
   "compatibility_date": "2025-11-22",
   "compatibility_flags": [
     "nodejs_compat"
   ],
-  "pages_build_output_dir": "dist"
+  "keep_vars": true,
+  "upload_source_maps": true,
+  "ai": {
+    "binding": "AI"
+  },
+  "analytics_engine_datasets": [
+    {
+      "binding": "ANALYTICS",
+      "dataset": "sink"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "0fe6baac68ef43a1b33fd1e5a83c5bb2" // IMPORTANT: Change this to your KV namespace ID
+    }
+  ]
 }
