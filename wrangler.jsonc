@@ -2,15 +2,10 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "sink",
   "compatibility_date": "2025-11-22",
-  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
   "pages_build_output_dir": "dist",
-  "assets": {
-    "binding": "STATIC",
-    "directory": "dist/public"
-  },
-  "main": "dist/_worker.js/index.js",
-  "keep_vars": true,
-  "upload_source_maps": true,
   "ai": {
     "binding": "AI"
   },
