@@ -23,7 +23,17 @@ function getLinkHost(url) {
   return host
 }
 
-const shortLink = computed(() => `${origin}/${props.link.slug}`)
+function getRootDomain(hostname) {
+  // Remove subdomain if present (e.g., "links.vxl.to" -> "vxl.to")
+  const parts = hostname.split('.')
+  if (parts.length > 2) {
+    return parts.slice(-2).join('.')
+  }
+  return hostname
+}
+
+const rootDomain = computed(() => getRootDomain(host))
+const shortLink = computed(() => `https://${rootDomain.value}/${props.link.slug}`)
 const linkIcon = computed(() => `https://unavatar.io/${getLinkHost(props.link.url)}?fallback=https://sink.cool/icon.png`)
 
 const { copy, copied } = useClipboard({ source: shortLink.value, copiedDuring: 400 })
@@ -65,7 +75,7 @@ function copyLink() {
           <div class="flex-1 overflow-hidden">
             <div class="flex items-center">
               <div class="truncate leading-5 font-bold">
-                {{ host }}/{{ link.slug }}
+                {{ rootDomain }}/{{ link.slug }}
               </div>
 
               <CopyCheck
