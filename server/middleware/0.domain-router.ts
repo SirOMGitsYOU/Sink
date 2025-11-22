@@ -1,9 +1,11 @@
 export default eventHandler((event) => {
   const host = getHeader(event, 'host') || getHeader(event, 'x-forwarded-host') || ''
-  const isDashboardSubdomain = host.includes('links.')
 
-  // If accessing /dashboard on non-links subdomain, redirect to root
-  if (event.path.startsWith('/dashboard') && host && !isDashboardSubdomain) {
+  // If subdomain is links., allow everything through
+  if (host.includes('links.')) {
+    return
+  } // If accessing /dashboard on root domain, redirect to root
+  else if (!host.includes('links.') && event.path.startsWith('/dashboard')) {
     return sendRedirect(event, '/', 301)
   }
 })
